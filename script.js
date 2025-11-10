@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- VIKTIG FOR TESTING ---
     // Setter dato til 10. desember for testing
-    const erIDesember = true;
-    const dagensDato = 1; // Late som det er 10. desember
+    // const erIDesember = true;
+    // const dagensDato = 1; // Late som det er 10. desember
 
     // --- EKTE KODE (brukes når du er ferdig med å teste): ---
     // Kommenter ut de to linjene over og fjern kommentar fra de tre under
-    // const naa = new Date();
-    // const erIDesember = naa.getMonth() === 11; // 11 = Desember (0-indeksert)
-    // const dagensDato = naa.getDate();
+    const naa = new Date();
+    const erIDesember = naa.getMonth() === 11; // 11 = Desember (0-indeksert)
+    const dagensDato = naa.getDate();
     // --------------------------------------------------------
 
     // Hent modal-elementene
