@@ -104,20 +104,24 @@ header h1 {
 
 .modal-content {
     background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    background-color: #c82a2a; /* Festive red for the gift box */
+    padding: 30px; /* Inner padding for content */
+    border: 10px solid gold; /* Gold border to simulate a ribbon */
+    border-radius: 15px; /* Slightly rounded corners for a gift box look */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Standard shadow for depth */
     width: 90%;
     max-width: 500px;
     position: relative;
     text-align: left;
+    color: white; /* Default text color for content inside the red box */
 
     /* ----- NY ANIMASJON ----- */
-    /* Start liten og usynlig */
+    /* Start completely hidden, small, and slightly rotated */
     opacity: 0;
-    transform: scale(0.8);
-    /* Legg til overgang for "pop-up" effekten */
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform: scale(0.2) rotate(10deg); /* Start very small and slightly rotated */
+    transform-origin: center center; /* Ensure scaling/rotation from the center */
+    /* Longer transition for a more dramatic "pop-open" effect */
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 .modal-close {
@@ -126,8 +130,9 @@ header h1 {
     right: 20px;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #aaa;
+    color: gold; /* Gold color for the close button to match the ribbon */
     cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Add some depth */
 }
 
 .modal-close:hover {
@@ -136,15 +141,17 @@ header h1 {
 
 #modal-title {
     font-family: 'Mountains of Christmas', cursive;
-    color: #c82a2a;
+    color: gold; /* Gold title for better contrast on red background */
     font-size: 2.5rem;
     margin-top: 0;
     margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Add some depth */
 }
 
 #modal-body {
     font-size: 1.1rem;
     line-height: 1.6;
+    color: #eee; /* Lighter text color for readability on red background */
 }
 
 /* Viser modalen når denne klassen legges til */
@@ -158,7 +165,65 @@ header h1 {
 /* Viser innholdet når modalen er åpen */
 .modal-overlay.is-open .modal-content {
     /* ----- NY ANIMASJON ----- */
-    /* Vis og skaler opp innholdsboksen */
-    opacity: 1;
-    transform: scale(1);
+    /* Pop to full size and straight when opened */
+    opacity: 1; 
+    transform: scale(1) rotate(0deg);
+}
+
+/* ===== JULEGAVE-ANIMASJON ===== */
+.christmas-gift {
+    position: fixed;
+    /* Start in the center of the screen */
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    /* Use CSS variables for dynamic animation */
+    animation: shoot-out var(--duration, 1.5s) ease-out forwards;
+    animation-delay: var(--delay, 0s);
+    pointer-events: none; /* Make sure they don't block clicks */
+    z-index: 200; /* Above the modal overlay */
+}
+
+@keyframes shoot-out {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    to {
+        /* Use CSS variables for random end positions */
+        transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.5) rotate(var(--rot, 0deg));
+        opacity: 0;
+    }
+}
+
+/* ===== SNOWFALL ANIMATION ===== */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 99; /* Behind the modal but above the calendar */
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10%; /* Start above the screen */
+    background: white;
+    border-radius: 50%;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) translateX(0);
+    }
+    to {
+        /* Fall down and drift slightly to the side */
+        transform: translateY(105vh) translateX(5vw);
+    }
 }
